@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 USER root
-SHELL ["/bin/bash", "-c"]
+# SHELL ["/bin/bash", "-c"]
 WORKDIR /tmp
 COPY . .
 RUN sh init.sh
