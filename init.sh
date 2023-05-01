@@ -1,3 +1,7 @@
+apt-get update --yes && \
+    apt-get install --yes --no-install-recommends \
+    ca-certificates
+
 # 使用清华源 for ubuntu 22.04 jammy 
 # https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/
 cat > /etc/apt/sources.list << EOF
@@ -22,7 +26,7 @@ EOF
 
 apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
-    python3 pip3 \
+    python3 pip \
     ruby-full \
     build-essential autoconf libtool \
     git \
