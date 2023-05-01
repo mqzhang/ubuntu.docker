@@ -22,6 +22,7 @@ EOF
 
 apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
+    python3 pip3 \
     ruby-full \
     build-essential autoconf libtool \
     git \
