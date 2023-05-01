@@ -34,21 +34,19 @@ apt-get update --yes && \
     screen && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# python pip
+# https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+ln -s /usr/bin/python3 /usr/local/bin/python 
+pip3 --no-cache-dir install --upgrade pip 
 
 # Ruby gems 
 # 添加镜像源并移除默认源
 gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
 # 列出已有源
 gem sources -l
-# 应该只有镜像源一个
-
 # echo installing current RubyGems
 gem update --system -N >/dev/null 2>&1
-
-echo installing Bundler
 gem install bundler -N >/dev/null 2>&1
 
 
-# python pip
-# https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
-pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
