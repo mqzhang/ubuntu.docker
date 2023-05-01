@@ -1,1 +1,1 @@
-docker build -t mqdev .
+docker build -t quay.io/mqdev/ubuntu:latest .

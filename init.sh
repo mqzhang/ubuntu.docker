@@ -26,9 +26,9 @@ EOF
 
 apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
-    python3 pip \
+    python3 python3-pip \
     ruby-full \
-    build-essential autoconf libtool \
+    apt-utils build-essential autoconf libtool \
     git \
     sqlite3 libsqlite3-dev \
     screen && \
