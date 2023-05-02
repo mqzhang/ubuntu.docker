@@ -14,8 +14,9 @@ Pull this container with the following Docker command:
 docker pull quay.io/mqdev/ubuntu
 ```
 
-## installed packages
-* python
-* ruby 
+## Installed packages
+* python, pip
+* ruby, gem
+* nodejs, npm, yarn
 * git 
 * sqlite

@@ -29,6 +29,7 @@ apt-get update --yes && \
     apt-utils build-essential autoconf libtool libssl-dev libffi-dev  \
     python3 python3-pip python3-dev \
     ruby-full \
+    nodejs npm \
     git \
     sqlite3 libsqlite3-dev \
     screen && \
@@ -42,6 +43,7 @@ pip3 --no-cache-dir install --upgrade pip
 pip install -r requirements.txt
 
 # Ruby gems 
+# https://mirrors.tuna.tsinghua.edu.cn/help/rubygems/
 # 添加镜像源并移除默认源
 gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
 # 列出已有源
@@ -50,3 +52,16 @@ gem sources -l
 gem update --system -N >/dev/null 2>&1
 gem install bundler -N >/dev/null 2>&1
 bundle install
+
+# nodejs npm yarn
+# 淘宝镜像
+npm config set registry https://registry.npm.taobao.org
+npm config set disturl https://npm.taobao.org/dist
+npm config set electron_mirror https://npm.taobao.org/mirrors/electron/
+npm install --global yarn
+
+# 淘宝镜像
+yarn config set registry https://registry.npm.taobao.org
+yarn config set disturl https://npm.taobao.org/dist
+yarn config set electron_mirror https://npm.taobao.org/mirrors/electron/
+yarn --version
