@@ -31,7 +31,7 @@ apt-get update --yes && \
     apt-utils build-essential autoconf libtool libssl-dev libffi-dev  \
     python3 python3-pip python3-dev \
     ruby-full \
-    nodejs npm \
+    # nodejs npm \
     git \
     sqlite3 libsqlite3-dev \
     screen && \
@@ -42,7 +42,7 @@ apt-get update --yes && \
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ln -s /usr/bin/python3 /usr/local/bin/python 
 pip3 --no-cache-dir install --upgrade pip 
-pip install -r requirements.txt
+# pip install -r requirements.txt
 
 # Ruby gems 
 # https://mirrors.tuna.tsinghua.edu.cn/help/rubygems/
@@ -54,8 +54,8 @@ gem sources -l
 # gem update --system -N >/dev/null 2>&1
 gem install bundler -N >/dev/null 2>&1
 bundle config mirror.https://rubygems.org https://gems.ruby-china.com
-bundle install
+# bundle install
 
-# nodejs npm yarn
-npm install --global yarn
-yarn --version
+# # nodejs npm yarn
+# npm install --global yarn
+# yarn --version

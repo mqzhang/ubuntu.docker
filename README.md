@@ -17,6 +17,5 @@ docker pull quay.io/mqdev/ubuntu
 ## Installed packages
 * python, pip
 * ruby, gem
-* nodejs, npm, yarn
 * git 
 * sqlite
