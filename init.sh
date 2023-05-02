@@ -1,3 +1,5 @@
+set -x
+
 apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
     ca-certificates
@@ -45,23 +47,16 @@ pip install -r requirements.txt
 # Ruby gems 
 # https://mirrors.tuna.tsinghua.edu.cn/help/rubygems/
 # 添加镜像源并移除默认源
-gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
+gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
 # 列出已有源
 gem sources -l
 # echo installing current RubyGems
-gem update --system -N >/dev/null 2>&1
+# gem update --system -N >/dev/null 2>&1
 gem install bundler -N >/dev/null 2>&1
+bundle config mirror.https://rubygems.org https://gems.ruby-china.com
 bundle install
 
 # nodejs npm yarn
-# 淘宝镜像
-npm config set registry https://registry.npm.taobao.org
-npm config set disturl https://npm.taobao.org/dist
-npm config set electron_mirror https://npm.taobao.org/mirrors/electron/
 npm install --global yarn
 
-# 淘宝镜像
-yarn config set registry https://registry.npm.taobao.org
-yarn config set disturl https://npm.taobao.org/dist
-yarn config set electron_mirror https://npm.taobao.org/mirrors/electron/
 yarn --version
