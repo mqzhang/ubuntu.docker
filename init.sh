@@ -39,6 +39,7 @@ apt-get update --yes && \
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ln -s /usr/bin/python3 /usr/local/bin/python 
 pip3 --no-cache-dir install --upgrade pip 
+pip install -r requirements.txt
 
 # Ruby gems 
 # 添加镜像源并移除默认源
@@ -48,5 +49,4 @@ gem sources -l
 # echo installing current RubyGems
 gem update --system -N >/dev/null 2>&1
 gem install bundler -N >/dev/null 2>&1
-
-
+bundle install
