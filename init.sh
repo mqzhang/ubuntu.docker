@@ -31,11 +31,12 @@ apt-get update --yes && \
     apt-utils build-essential autoconf libtool libssl-dev libffi-dev  \
     python3 python3-pip python3-dev \
     ruby-full \
-    # nodejs npm \
     git \
     sqlite3 libsqlite3-dev \
     screen && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+    # nodejs npm \
 
 # python pip
 # https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
