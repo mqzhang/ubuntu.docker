@@ -33,8 +33,10 @@ apt-get update --yes && \
     ruby-full \
     git \
     sqlite3 libsqlite3-dev \
-    screen && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    libpq-dev \
+    cron \
+    screen # && \
+    # apt-get clean && rm -rf /var/lib/apt/lists/*
 
     # nodejs npm \
 
