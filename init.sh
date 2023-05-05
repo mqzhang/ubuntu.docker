@@ -35,7 +35,7 @@ apt-get update --yes && \
     sqlite3 libsqlite3-dev \
     libpq-dev \
     cron \
-    screen # && \
+    screen less # && \
     # apt-get clean && rm -rf /var/lib/apt/lists/*
 
     # nodejs npm \
