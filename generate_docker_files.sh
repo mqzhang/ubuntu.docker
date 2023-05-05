@@ -30,15 +30,18 @@ EOF
 mkdir docker
 
 cat > docker/build.sh <<EOF
+set -x
 docker build -t $image_name .
 EOF
 
 cat > docker/run.sh <<EOF
-docker run -it -d --name $image_name -p $port:$port -v $HOME:/root/home quay.io/mqdev/ubuntu
+set -x
+docker run -it -d --name $image_name -p $port:$port -v \$HOME:/root/home quay.io/mqdev/ubuntu
 docker exec -it $image_name bash
 EOF
 
 cat > docker/stop.sh <<EOF
+set -x
 docker stop $image_name 
 docker rm $image_name 
 EOF
