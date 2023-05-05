@@ -24,7 +24,7 @@ COPY . .
 RUN ls
 EXPOSE $port
 
-ENTRYPOINT ["/bin/bash", "-c"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
 EOF
 
 mkdir docker
