@@ -36,7 +36,7 @@ EOF
 
 cat > docker/run.sh <<EOF
 set -x
-docker run -it -d --name $image_name -p $port:$port -v \$HOME:/root/home quay.io/mqdev/ubuntu
+docker run -it -d --name $image_name -p $port:$port -v \$HOME:/root/home $image_name
 docker exec -it $image_name bash
 EOF
 
