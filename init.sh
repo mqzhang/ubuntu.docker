@@ -42,6 +42,7 @@ apt-get update --yes && \
 
 # python pip
 # https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
+# pip config set global.index-url https://pypi.python.org/simple
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ln -s /usr/bin/python3 /usr/local/bin/python 
 pip3 --no-cache-dir install --upgrade pip 
