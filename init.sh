@@ -28,17 +28,18 @@ EOF
 
 apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
-    apt-utils build-essential autoconf libtool libssl-dev libffi-dev  \
+    apt-utils build-essential autoconf libtool libssl-dev libffi-dev libyaml-dev \
     python3 python3-pip python3-dev \
-    ruby-full \
+    rbenv \
     git curl \
     sqlite3 libsqlite3-dev \
     libpq-dev \
     cron \
-    screen less # && \
+    screen less vim # && \
     # apt-get clean && rm -rf /var/lib/apt/lists/*
 
     # nodejs npm \
+    # ruby-full \
 
 # python pip
 # https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
@@ -49,6 +50,19 @@ pip3 --no-cache-dir install --upgrade pip
 # pip install -r requirements.txt
 
 # Ruby gems 
+
+# rbenv
+cat >> ~/.bashrc << EOF
+eval "\$(rbenv init -)"
+EOF
+
+source ~/.bashrc
+
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+rbenv install 3.2.1
+rbenv global 3.2.1
+
+
 # https://mirrors.tuna.tsinghua.edu.cn/help/rubygems/
 # 添加镜像源并移除默认源
 gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
@@ -66,7 +80,7 @@ bundle config mirror.https://rubygems.org https://gems.ruby-china.com
 
 # fly.io
 curl -L https://fly.io/install.sh | sh
-cat >> /root/.bashrc << EOF
+cat >> ~/.bashrc << EOF
 export FLYCTL_INSTALL="/root/.fly"
 export PATH="\$FLYCTL_INSTALL/bin:\$PATH"
 EOF
