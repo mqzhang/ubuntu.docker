@@ -63,3 +63,10 @@ bundle config mirror.https://rubygems.org https://gems.ruby-china.com
 # # nodejs npm yarn
 # npm install --global yarn
 # yarn --version
+
+# fly.io
+curl -L https://fly.io/install.sh | sh
+cat >> /root/.bashrc << EOF
+export FLYCTL_INSTALL="/root/.fly"
+export PATH="\$FLYCTL_INSTALL/bin:\$PATH"
+EOF
