@@ -30,6 +30,7 @@ apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
     apt-utils build-essential autoconf libtool libssl-dev libffi-dev libyaml-dev \
     python3 python3-pip python3-dev \
+    nodejs npm \
     rbenv \
     git curl \
     sqlite3 libsqlite3-dev \
@@ -74,9 +75,9 @@ gem install bundler -N >/dev/null 2>&1
 bundle config mirror.https://rubygems.org https://gems.ruby-china.com
 # bundle install
 
-# # nodejs npm yarn
-# npm install --global yarn
-# yarn --version
+# nodejs npm yarn
+npm install --global yarn
+yarn --version
 
 # fly.io
 curl -L https://fly.io/install.sh | sh
