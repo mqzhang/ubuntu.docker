@@ -1,8 +1,8 @@
 set -x
 
-apt-get update --yes && \
-    apt-get install --yes --no-install-recommends \
-    ca-certificates
+# apt-get update --yes && \
+#     apt-get install --yes --no-install-recommends \
+#     ca-certificates
 
 # 使用清华源 for ubuntu 22.04 jammy 
 # https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/
@@ -29,7 +29,7 @@ EOF
 apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
     apt-utils build-essential autoconf libtool libssl-dev libffi-dev libyaml-dev \
-    libbz2-dev libncurses5-dev libncursesw5-dev libreadline-dev liblzma-dev \
+    zlib1g-dev libbz2-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev liblzma-dev libffi-dev libreadline-dev \
     nodejs npm \
     git curl \
     sqlite3 libsqlite3-dev \

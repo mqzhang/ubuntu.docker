@@ -1,5 +1,14 @@
 FROM ubuntu:22.04
 
+# Set the timezone environment variable
+ENV TZ=Asia/Shanghai
+
+# Install the tzdata package and configure the timezone & ca-certificates
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata ca-certificates\
+    && ln -fs /usr/share/zoneinfo/$TZ /etc/localtime \
+    && dpkg-reconfigure -f noninteractive tzdata
+
 USER root
 # SHELL ["/bin/bash", "-c"]
 WORKDIR /tmp
