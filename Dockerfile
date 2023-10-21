@@ -21,7 +21,7 @@ RUN cat tsinghua.ubuntu.22.04.sources.list > /etc/apt/sources.list
 # fly.io
 RUN curl -L https://fly.io/install.sh | sh
 RUN echo 'export FLYCTL_INSTALL="/root/.fly"' >> ~/.bashrc
-RUN echo 'export PATH="\$FLYCTL_INSTALL/bin:\$PATH"' >> ~/.bashrc
+RUN echo 'export PATH="$FLYCTL_INSTALL/bin:$PATH"' >> ~/.bashrc
 
 # apt install
 COPY scripts/basic_apt_install.sh .
@@ -47,61 +47,27 @@ RUN npm install --global yarn
 # https://github.com/rbenv/rbenv
 RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 RUN git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-ENV PATH ~/.rbenv/bin:$PATH
+ENV PATH="~/.rbenv/bin:$PATH"
 # RUN ~/.rbenv/plugins/ruby-build/install.sh
 RUN echo 'eval "$(~/.rbenv/bin/rbenv init - bash)"' >> ~/.bashrc
-RUN ~/.rbenv/bin/rbenv install 3.2.1
-RUN ~/.rbenv/bin/rbenv global 3.2.1
+RUN rbenv install 3.2.1
+RUN rbenv global 3.2.1
 
 # python
 RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 RUN cd ~/.pyenv && src/configure && make -C src
-ENV PATH ~/.pyenv/bin:$PATH
+ENV PATH="~/.pyenv/bin:$PATH"
 # RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 # RUN echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 RUN echo 'eval "$(~/.pyenv/bin/pyenv init -)"' >> ~/.bashrc
-RUN ~/.pyenv/bin/pyenv install 3.11.6
-RUN ~/.pyenv/bin/pyenv global 3.11.6
+RUN pyenv install 3.11.6
+RUN pyenv global 3.11.6
 
 # python 和 ruby 基础环境配置
 COPY scripts/requirements.txt .
 
 COPY scripts/pyrb_setup.sh .
 RUN bash pyrb_setup.sh
-# RUN <<EOT bash
-#     set -x 
-#     eval "$(~/.rbenv/bin/rbenv init - bash)"
-#     eval "$(~/.pyenv/bin/pyenv init -)"
-
-#     # pip 源
-#     # https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
-#     # pip config set global.index-url https://pypi.python.org/simple
-#     pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-
-#     # https://jupyter.org/install
-#     pip install -r requirements.txt
-
-#     # gem 源
-#     # https://mirrors.tuna.tsinghua.edu.cn/help/rubygems/
-    
-#     # disable gem document
-#     echo 'gem: --no-document' >> ~/.gemrc
-
-#     # 添加镜像源并移除默认源
-#     gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
-#     # 列出已有源
-#     gem sources -l
-#     # gem update --system -N >/dev/null 2>&1
-
-#     gem install bundler -N >/dev/null 2>&1
-#     bundle config mirror.https://rubygems.org https://gems.ruby-china.com
-#     # bundle install
-
-#     # https://github.com/SciRuby/iruby
-#     gem install iruby pry pycall pandas numpy matplotlib
-#     iruby register --force
-
-# EOT
 
 # jupyter
 RUN mkdir /root/.jupyter

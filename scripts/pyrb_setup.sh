@@ -1,4 +1,5 @@
     set -x 
+
     eval "$(~/.rbenv/bin/rbenv init - bash)"
     eval "$(~/.pyenv/bin/pyenv init -)"
 
