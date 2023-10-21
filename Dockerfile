@@ -76,14 +76,15 @@ RUN <<EOT bash
 
     # gem 源
     # https://mirrors.tuna.tsinghua.edu.cn/help/rubygems/
+    
+    # disable gem document
+    echo 'gem: --no-document' >> ~/.gemrc
+
     # 添加镜像源并移除默认源
     gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
     # 列出已有源
     gem sources -l
     # gem update --system -N >/dev/null 2>&1
-
-    # disable gem document
-    echo 'gem: --no-document' >> ~/.gemrc
 
     gem install bundler -N >/dev/null 2>&1
     bundle config mirror.https://rubygems.org https://gems.ruby-china.com
