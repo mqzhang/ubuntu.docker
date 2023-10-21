@@ -20,7 +20,7 @@ RUN cat tsinghua.ubuntu.22.04.sources.list > /etc/apt/sources.list
 
 # fly.io
 COPY scripts/install_fly.io.sh .
-RUN install_fly.io.sh
+RUN bash install_fly.io.sh
 # RUN <<EOT bash
 #     set -x
 #     curl -L https://fly.io/install.sh | sh
@@ -30,7 +30,7 @@ RUN install_fly.io.sh
 
 # apt install
 COPY scripts/basic_apt_install.sh .
-RUN basic_apt_install.sh
+RUN bash basic_apt_install.sh
 # RUN <<EOT bash
 #     set -x
 #     apt-get update --yes && \
@@ -72,7 +72,7 @@ RUN ~/.pyenv/bin/pyenv global 3.11.6
 COPY scripts/requirements.txt .
 
 COPY scripts/pyrb_setup.sh .
-RUN pyrb_setup.sh
+RUN bash pyrb_setup.sh
 # RUN <<EOT bash
 #     set -x 
 #     eval "$(~/.rbenv/bin/rbenv init - bash)"
@@ -110,7 +110,7 @@ RUN pyrb_setup.sh
 
 # jupyter
 RUN mkdir /root/.jupyter
-COPY jupyter_lab_config.py /root/.jupyter/
+COPY jupyter/jupyter_lab_config.py /root/.jupyter/
 
 RUN apt-get clean
 
@@ -123,5 +123,5 @@ WORKDIR /root
 # ENTRYPOINT ["/bin/bash"]
 # Set the entrypoint to a command that does nothing
 # ENTRYPOINT ["tail", "-f", "/dev/null"]
-COPY start_jupyter.sh .
+COPY jupyter/start_jupyter.sh .
 ENTRYPOINT ["bash", "/root/start_jupyter.sh"]
