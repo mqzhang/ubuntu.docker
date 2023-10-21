@@ -12,6 +12,7 @@ RUN apt-get update \
     && dpkg-reconfigure -f noninteractive tzdata
 
 USER root
+SHELL ["/bin/bash", "-c"]
 WORKDIR /tmp
 
 COPY tsinghua.ubuntu.22.04.sources.list .
@@ -63,7 +64,9 @@ RUN echo 'eval "$(~/.pyenv/bin/pyenv init -)"' >> ~/.bashrc
 RUN ~/.pyenv/bin/pyenv install 3.11.6
 RUN ~/.pyenv/bin/pyenv global 3.11.6
 
-# 更换软件源
+# python 和 ruby 基础环境配置
+COPY requirements.txt .
+
 RUN <<EOT bash
     set -x 
     eval "$(~/.rbenv/bin/rbenv init - bash)"
@@ -73,6 +76,9 @@ RUN <<EOT bash
     # https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
     # pip config set global.index-url https://pypi.python.org/simple
     pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
+    # https://jupyter.org/install
+    pip install -r requirements.txt
 
     # gem 源
     # https://mirrors.tuna.tsinghua.edu.cn/help/rubygems/
@@ -90,20 +96,26 @@ RUN <<EOT bash
     bundle config mirror.https://rubygems.org https://gems.ruby-china.com
     # bundle install
 
+    # https://github.com/SciRuby/iruby
+    gem install iruby pry pycall pandas numpy matplotlib
+    iruby register --force
+
 EOT
 
-# SHELL ["/bin/bash", "-c"]
-# WORKDIR /tmp
-# COPY . .
-# RUN bash init.sh
+# jupyter
+RUN mkdir /root/.jupyter
+COPY jupyter_lab_config.py /root/.jupyter/
 
 RUN apt-get clean
 
 EXPOSE 3000
+EXPOSE 8888
 
+WORKDIR /root
 # CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
 # CMD ruby -run -ehttpd . -p3000
 # ENTRYPOINT ["/bin/bash"]
-
 # Set the entrypoint to a command that does nothing
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+# ENTRYPOINT ["tail", "-f", "/dev/null"]
+COPY start_jupyter.sh .
+ENTRYPOINT ["bash", "/root/start_jupyter.sh"]
