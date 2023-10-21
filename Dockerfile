@@ -19,14 +19,9 @@ COPY scripts/tsinghua.ubuntu.22.04.sources.list .
 RUN cat tsinghua.ubuntu.22.04.sources.list > /etc/apt/sources.list
 
 # fly.io
-COPY scripts/install_fly.io.sh .
-RUN bash install_fly.io.sh
-# RUN <<EOT bash
-#     set -x
-#     curl -L https://fly.io/install.sh | sh
-#     echo 'export FLYCTL_INSTALL="/root/.fly"' >> ~/.bashrc
-#     echo 'export PATH="\$FLYCTL_INSTALL/bin:\$PATH"' >> ~/.bashrc
-# EOT
+RUN curl -L https://fly.io/install.sh | sh
+RUN echo 'export FLYCTL_INSTALL="/root/.fly"' >> ~/.bashrc
+RUN echo 'export PATH="\$FLYCTL_INSTALL/bin:\$PATH"' >> ~/.bashrc
 
 # apt install
 COPY scripts/basic_apt_install.sh .
