@@ -51,9 +51,10 @@ cd ~/.pyenv && src/configure && make -C src
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+export PATH="~/.pyenv/bin:$PATH"
 . ~/.bashrc
-~/.pyenv/bin/pyenv install 3.11.6
-~/.pyenv/bin/pyenv global 3.11.6
+pyenv install 3.11.6
+pyenv global 3.11.6
 
 # https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
 # pip config set global.index-url https://pypi.python.org/simple
@@ -69,14 +70,20 @@ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 # git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
 
+export PATH="~/.rbenv/bin:$PATH"
+# Run ruby-build install script
+. ~/.rbenv/plugins/ruby-build/install.sh
+# Set PATH environment variable
+
+
 echo 'eval "$(~/.rbenv/bin/rbenv init - bash)"' >> ~/.bashrc
 # cat >> ~/.bashrc << EOF
 # eval "\$(rbenv init -)"
 # EOF
 . ~/.bashrc
 
-~/.rbenv/bin/rbenv install 3.2.1
-~/.rbenv/bin/rbenv global 3.2.1
+rbenv install 3.2.1
+rbenv global 3.2.1
 
 
 # https://mirrors.tuna.tsinghua.edu.cn/help/rubygems/
