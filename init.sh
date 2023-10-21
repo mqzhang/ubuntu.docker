@@ -29,9 +29,8 @@ EOF
 apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
     apt-utils build-essential autoconf libtool libssl-dev libffi-dev libyaml-dev \
-    python3 python3-pip python3-dev \
+    libbz2-dev libncurses5-dev libncursesw5-dev libreadline-dev liblzma-dev \
     nodejs npm \
-    rbenv \
     git curl \
     sqlite3 libsqlite3-dev \
     libpq-dev \
@@ -41,27 +40,43 @@ apt-get update --yes && \
 
     # nodejs npm \
     # ruby-full \
+    # python3 python3-pip python3-dev \
 
 # python pip
+
+# pyenv
+# https://github.com/pyenv/pyenv
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+cd ~/.pyenv && src/configure && make -C src
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+. ~/.bashrc
+~/.pyenv/bin/pyenv install 3.11.6
+~/.pyenv/bin/pyenv global 3.11.6
+
 # https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
 # pip config set global.index-url https://pypi.python.org/simple
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-ln -s /usr/bin/python3 /usr/local/bin/python 
-pip3 --no-cache-dir install --upgrade pip 
+# ln -s /usr/bin/python3 /usr/local/bin/python 
+# pip3 --no-cache-dir install --upgrade pip 
 # pip install -r requirements.txt
 
-# Ruby gems 
-
+# Ruby 
 # rbenv
-cat >> ~/.bashrc << EOF
-eval "\$(rbenv init -)"
-EOF
-
-source ~/.bashrc
-
+# https://github.com/rbenv/rbenv
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-rbenv install 3.2.1
-rbenv global 3.2.1
+# git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+
+echo 'eval "$(~/.rbenv/bin/rbenv init - bash)"' >> ~/.bashrc
+# cat >> ~/.bashrc << EOF
+# eval "\$(rbenv init -)"
+# EOF
+. ~/.bashrc
+
+~/.rbenv/bin/rbenv install 3.2.1
+~/.rbenv/bin/rbenv global 3.2.1
 
 
 # https://mirrors.tuna.tsinghua.edu.cn/help/rubygems/
@@ -69,19 +84,20 @@ rbenv global 3.2.1
 gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
 # 列出已有源
 gem sources -l
-# echo installing current RubyGems
 # gem update --system -N >/dev/null 2>&1
 gem install bundler -N >/dev/null 2>&1
 bundle config mirror.https://rubygems.org https://gems.ruby-china.com
 # bundle install
 
+
 # nodejs npm yarn
 npm install --global yarn
 yarn --version
 
-# fly.io
-curl -L https://fly.io/install.sh | sh
-cat >> ~/.bashrc << EOF
-export FLYCTL_INSTALL="/root/.fly"
-export PATH="\$FLYCTL_INSTALL/bin:\$PATH"
-EOF
+
+# # fly.io
+# curl -L https://fly.io/install.sh | sh
+# cat >> ~/.bashrc << EOF
+# export FLYCTL_INSTALL="/root/.fly"
+# export PATH="\$FLYCTL_INSTALL/bin:\$PATH"
+# EOF

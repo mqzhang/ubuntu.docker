@@ -4,7 +4,7 @@ USER root
 # SHELL ["/bin/bash", "-c"]
 WORKDIR /tmp
 COPY . .
-RUN sh init.sh
+RUN bash init.sh
 
 EXPOSE 3000
 

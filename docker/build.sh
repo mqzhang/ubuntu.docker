@@ -1,3 +1,3 @@
 set -x
 
-docker build -t quay.io/mqdev/ubuntu .
+docker build --progress=plain -t quay.io/mqdev/ubuntu . 
