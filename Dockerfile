@@ -15,31 +15,35 @@ USER root
 SHELL ["/bin/bash", "-c"]
 WORKDIR /tmp
 
-COPY tsinghua.ubuntu.22.04.sources.list .
+COPY scripts/tsinghua.ubuntu.22.04.sources.list .
 RUN cat tsinghua.ubuntu.22.04.sources.list > /etc/apt/sources.list
 
 # fly.io
-RUN <<EOT bash
-    set -x
-    curl -L https://fly.io/install.sh | sh
-    echo 'export FLYCTL_INSTALL="/root/.fly"' >> ~/.bashrc
-    echo 'export PATH="\$FLYCTL_INSTALL/bin:\$PATH"' >> ~/.bashrc
-EOT
+COPY scripts/install_fly.io.sh .
+RUN install_fly.io.sh
+# RUN <<EOT bash
+#     set -x
+#     curl -L https://fly.io/install.sh | sh
+#     echo 'export FLYCTL_INSTALL="/root/.fly"' >> ~/.bashrc
+#     echo 'export PATH="\$FLYCTL_INSTALL/bin:\$PATH"' >> ~/.bashrc
+# EOT
 
 # apt install
-RUN <<EOT bash
-    set -x
-    apt-get update --yes && \
-    apt-get install --yes --no-install-recommends \
-    apt-utils build-essential autoconf libtool libssl-dev libffi-dev libyaml-dev \
-    zlib1g-dev libbz2-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev liblzma-dev libffi-dev libreadline-dev \
-    nodejs npm \
-    git curl \
-    sqlite3 libsqlite3-dev \
-    libpq-dev \
-    cron sudo \
-    screen less vim
-EOT
+COPY scripts/basic_apt_install.sh .
+RUN basic_apt_install.sh
+# RUN <<EOT bash
+#     set -x
+#     apt-get update --yes && \
+#     apt-get install --yes --no-install-recommends \
+#     apt-utils build-essential autoconf libtool libssl-dev libffi-dev libyaml-dev \
+#     zlib1g-dev libbz2-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev liblzma-dev libffi-dev libreadline-dev \
+#     nodejs npm \
+#     git curl \
+#     sqlite3 libsqlite3-dev \
+#     libpq-dev \
+#     cron sudo \
+#     screen less vim
+# EOT
 
 # yarn
 RUN npm install --global yarn
@@ -65,42 +69,44 @@ RUN ~/.pyenv/bin/pyenv install 3.11.6
 RUN ~/.pyenv/bin/pyenv global 3.11.6
 
 # python 和 ruby 基础环境配置
-COPY requirements.txt .
+COPY scripts/requirements.txt .
 
-RUN <<EOT bash
-    set -x 
-    eval "$(~/.rbenv/bin/rbenv init - bash)"
-    eval "$(~/.pyenv/bin/pyenv init -)"
+COPY scripts/pyrb_setup.sh .
+RUN pyrb_setup.sh
+# RUN <<EOT bash
+#     set -x 
+#     eval "$(~/.rbenv/bin/rbenv init - bash)"
+#     eval "$(~/.pyenv/bin/pyenv init -)"
 
-    # pip 源
-    # https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
-    # pip config set global.index-url https://pypi.python.org/simple
-    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+#     # pip 源
+#     # https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
+#     # pip config set global.index-url https://pypi.python.org/simple
+#     pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
-    # https://jupyter.org/install
-    pip install -r requirements.txt
+#     # https://jupyter.org/install
+#     pip install -r requirements.txt
 
-    # gem 源
-    # https://mirrors.tuna.tsinghua.edu.cn/help/rubygems/
+#     # gem 源
+#     # https://mirrors.tuna.tsinghua.edu.cn/help/rubygems/
     
-    # disable gem document
-    echo 'gem: --no-document' >> ~/.gemrc
+#     # disable gem document
+#     echo 'gem: --no-document' >> ~/.gemrc
 
-    # 添加镜像源并移除默认源
-    gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
-    # 列出已有源
-    gem sources -l
-    # gem update --system -N >/dev/null 2>&1
+#     # 添加镜像源并移除默认源
+#     gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
+#     # 列出已有源
+#     gem sources -l
+#     # gem update --system -N >/dev/null 2>&1
 
-    gem install bundler -N >/dev/null 2>&1
-    bundle config mirror.https://rubygems.org https://gems.ruby-china.com
-    # bundle install
+#     gem install bundler -N >/dev/null 2>&1
+#     bundle config mirror.https://rubygems.org https://gems.ruby-china.com
+#     # bundle install
 
-    # https://github.com/SciRuby/iruby
-    gem install iruby pry pycall pandas numpy matplotlib
-    iruby register --force
+#     # https://github.com/SciRuby/iruby
+#     gem install iruby pry pycall pandas numpy matplotlib
+#     iruby register --force
 
-EOT
+# EOT
 
 # jupyter
 RUN mkdir /root/.jupyter
