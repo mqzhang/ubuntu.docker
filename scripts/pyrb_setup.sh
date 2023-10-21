@@ -10,6 +10,7 @@
 
     # https://jupyter.org/install
     pip install -r requirements.txt
+    pyenv rehash
 
     # gem 源
     # https://mirrors.tuna.tsinghua.edu.cn/help/rubygems/
@@ -25,8 +26,9 @@
 
     gem install bundler -N >/dev/null 2>&1
     bundle config mirror.https://rubygems.org https://gems.ruby-china.com
-    # bundle install
 
     # https://github.com/SciRuby/iruby
-    gem install iruby pry pycall pandas numpy matplotlib
+    # gem install iruby pry pycall pandas numpy matplotlib
+    bundle install
+    rbenv rehash
     iruby register --force

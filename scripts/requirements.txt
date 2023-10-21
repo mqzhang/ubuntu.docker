@@ -1,8 +1,10 @@
 jupyterlab
 requests
-flask
 openai
 langchain
 sqlalchemy
 numpy
 pandas
+matplotlib
+pyodps
+python-dotenv
