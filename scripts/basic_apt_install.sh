@@ -8,4 +8,4 @@
     sqlite3 libsqlite3-dev \
     libpq-dev \
     cron sudo \
-    screen less vim
+    screen less vim ack-grep
