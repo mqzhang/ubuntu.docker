@@ -7,6 +7,7 @@ sqlalchemy
 numpy
 pandas
 matplotlib
+scipy
 pyodps
 python-dotenv
 tabulate
