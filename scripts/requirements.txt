@@ -2,6 +2,7 @@ jupyterlab
 requests
 openai
 langchain
+langchain_experimental
 sqlalchemy
 numpy
 pandas
