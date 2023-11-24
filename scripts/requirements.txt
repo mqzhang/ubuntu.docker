@@ -9,5 +9,8 @@ pandas
 matplotlib
 pyodps
 python-dotenv
-jupyter_ai
-jupyter_ai_magics
+tabulate
+# https://github.com/jupyterlab/jupyter-ai
+# using old version of langchain
+# jupyter_ai
+# jupyter_ai_magics
