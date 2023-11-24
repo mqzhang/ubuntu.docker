@@ -2,12 +2,24 @@ source 'https://gems.ruby-china.com'
 # source 'https://rubygems.org'
 
 gem 'nokogiri'
+
+# https://github.com/bkeepers/dotenv
+# gem 'dotenv-rails', groups: [:development, :test]
 gem 'dotenv'
 
 # iruby related
+# https://github.com/SciRuby/iruby
 gem 'iruby'
 gem 'pry'
+
+# https://github.com/mrkn/pycall.rb
 gem 'pycall'
 gem 'pandas'
 gem 'numpy'
 gem 'matplotlib'
+
+# https://github.com/alexrudall/ruby-openai
+gem 'ruby-openai'
+
+# https://github.com/andreibondarev/langchainrb
+gem 'langchainrb'
