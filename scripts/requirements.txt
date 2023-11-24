@@ -8,3 +8,5 @@ pandas
 matplotlib
 pyodps
 python-dotenv
+jupyter_ai
+jupyter_ai_magics
