@@ -9,7 +9,7 @@ c.ServerApp.ip = '0.0.0.0'
 c.ServerApp.notebook_dir = '/root/'
 c.ServerApp.password_required = False
 c.ServerApp.allow_root = True
-
+c.ContentsManager.allow_hidden = True
 
 #------------------------------------------------------------------------------
 # Application(SingletonConfigurable) configuration
