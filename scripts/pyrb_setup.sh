@@ -32,3 +32,9 @@
     bundle install
     rbenv rehash
     iruby register --force
+
+
+    # npm 
+    # https://npmmirror.com/
+    npm config set registry https://registry.npmmirror.com
+    yarn config set registry https://registry.npmmirror.com

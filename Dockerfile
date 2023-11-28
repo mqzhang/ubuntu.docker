@@ -71,6 +71,10 @@ COPY scripts/Gemfile .
 COPY scripts/pyrb_setup.sh .
 RUN bash pyrb_setup.sh
 
+# install db
+COPY scripts/install_db.sh .
+RUN bash install_db.sh
+
 # jupyter
 RUN mkdir /root/.jupyter
 COPY jupyter/jupyter_lab_config.py /root/.jupyter/
