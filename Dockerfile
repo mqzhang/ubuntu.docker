@@ -41,7 +41,17 @@ RUN bash basic_apt_install.sh
 # EOT
 
 # yarn
+RUN npm config set registry https://registry.npmmirror.com
 RUN npm install --global yarn
+RUN yarn config set registry https://registry.npmmirror.com
+
+# install db
+COPY scripts/install_db.sh .
+RUN bash install_db.sh
+
+# install chrome
+COPY scripts/install_chrome.sh .
+RUN bash install_chrome.sh
 
 # ruby
 # https://github.com/rbenv/rbenv
@@ -70,10 +80,6 @@ COPY scripts/requirements.txt .
 COPY scripts/Gemfile .
 COPY scripts/pyrb_setup.sh .
 RUN bash pyrb_setup.sh
-
-# install db
-COPY scripts/install_db.sh .
-RUN bash install_db.sh
 
 # jupyter
 RUN mkdir /root/.jupyter
