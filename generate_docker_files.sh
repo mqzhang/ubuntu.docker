@@ -18,7 +18,7 @@ cat > Dockerfile <<EOF
 # https://github.com/mqzhang/ubuntu.docker
 FROM quay.io/mqdev/ubuntu
 
-USER root
+USER max
 WORKDIR /tmp/$image_name
 COPY . .
 RUN ls
@@ -36,7 +36,7 @@ EOF
 
 cat > docker/run.sh <<EOF
 set -x
-docker run -it -d --name $image_name -p $port:$port -v \$HOME:/root/home $image_name
+docker run -it -d --name $image_name -p $port:$port -v \$HOME:/tmp/home $image_name
 docker exec -it $image_name bash
 EOF
 

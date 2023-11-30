@@ -48,6 +48,18 @@ RUN bash install_db.sh
 COPY scripts/install_chrome.sh .
 RUN bash install_chrome.sh
 
+# Create a new user
+RUN useradd -ms /bin/bash max
+
+# Set password for the new user (replace <password> with the desired password)
+RUN echo 'max:123' | chpasswd
+
+# Add the new user to the sudoers file
+RUN usermod -aG sudo max
+
+# Set the user as the default user for subsequent commands
+USER max
+
 # ruby
 # https://github.com/rbenv/rbenv
 RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
@@ -80,7 +92,7 @@ RUN bash pyrb_setup.sh
 RUN mkdir ~/.jupyter
 COPY jupyter/jupyter_lab_config.py .
 
-RUN apt-get clean
+# RUN apt-get clean
 
 EXPOSE 3000
 EXPOSE 8888
