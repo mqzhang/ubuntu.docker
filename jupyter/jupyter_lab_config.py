@@ -1,4 +1,6 @@
 # Configuration file for lab.
+import os
+from jupyter_core.paths import jupyter_config_dir, jupyter_data_dir
 
 c = get_config()  #noqa
 
@@ -6,7 +8,8 @@ c.ServerApp.token = ''
 c.ServerApp.password = ''
 c.ServerApp.open_browser = False
 c.ServerApp.ip = '0.0.0.0'
-c.ServerApp.notebook_dir = '/root/'
+# c.ServerApp.notebook_dir = '~/'
+c.ServerApp.root_dir = os.path.expanduser("~")
 c.ServerApp.password_required = False
 c.ServerApp.allow_root = True
 c.ContentsManager.allow_hidden = True
@@ -654,8 +657,8 @@ c.ContentsManager.allow_hidden = True
 # c.LabApp.tree_url = ''
 
 ## The directory for user settings.
-#  Default: '/root/.jupyter/lab/user-settings'
-# c.LabApp.user_settings_dir = '/root/.jupyter/lab/user-settings'
+#  Default: '~/.jupyter/lab/user-settings'
+# c.LabApp.user_settings_dir = '~/.jupyter/lab/user-settings'
 
 ## Whether to serve the app in watch mode
 #  Default: False
@@ -670,8 +673,8 @@ c.ContentsManager.allow_hidden = True
 # c.LabApp.workspaces_api_url = ''
 
 ## The directory for workspaces
-#  Default: '/root/.jupyter/lab/workspaces'
-# c.LabApp.workspaces_dir = '/root/.jupyter/lab/workspaces'
+#  Default: '~/.jupyter/lab/workspaces'
+# c.LabApp.workspaces_dir = '~/.jupyter/lab/workspaces'
 
 #------------------------------------------------------------------------------
 # ServerApp(JupyterApp) configuration

@@ -105,6 +105,6 @@ yarn --version
 # # fly.io
 # curl -L https://fly.io/install.sh | sh
 # cat >> ~/.bashrc << EOF
-# export FLYCTL_INSTALL="/root/.fly"
+# export FLYCTL_INSTALL="~/.fly"
 # export PATH="\$FLYCTL_INSTALL/bin:\$PATH"
 # EOF

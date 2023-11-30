@@ -18,11 +18,6 @@ WORKDIR /tmp
 COPY scripts/tsinghua.ubuntu.22.04.sources.list .
 RUN cat tsinghua.ubuntu.22.04.sources.list > /etc/apt/sources.list
 
-# # fly.io
-# RUN curl -L https://fly.io/install.sh | sh
-# RUN echo 'export FLYCTL_INSTALL="/root/.fly"' >> ~/.bashrc
-# RUN echo 'export PATH="$FLYCTL_INSTALL/bin:$PATH"' >> ~/.bashrc
-
 # apt install
 COPY scripts/basic_apt_install.sh .
 RUN bash basic_apt_install.sh
@@ -82,19 +77,18 @@ COPY scripts/pyrb_setup.sh .
 RUN bash pyrb_setup.sh
 
 # jupyter
-RUN mkdir /root/.jupyter
-COPY jupyter/jupyter_lab_config.py /root/.jupyter/
+RUN mkdir ~/.jupyter
+COPY jupyter/jupyter_lab_config.py .
 
 RUN apt-get clean
 
 EXPOSE 3000
 EXPOSE 8888
 
-WORKDIR /root
 # CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
 # CMD ruby -run -ehttpd . -p3000
 # ENTRYPOINT ["/bin/bash"]
 # Set the entrypoint to a command that does nothing
 # ENTRYPOINT ["tail", "-f", "/dev/null"]
 COPY jupyter/start_jupyter.sh .
-ENTRYPOINT ["bash", "/root/start_jupyter.sh"]
+ENTRYPOINT ["bash", "/tmp/start_jupyter.sh"]
