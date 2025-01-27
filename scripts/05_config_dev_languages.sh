@@ -1,4 +1,4 @@
-mise activate
+eval "$(mise activate bash)"
 
 echo 'gem: --no-document' >> ~/.gemrc
 gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
