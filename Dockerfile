@@ -39,10 +39,13 @@ RUN bash 02_basic_apt_install.sh
 COPY scripts/03_install_mise.sh .
 RUN bash 03_install_mise.sh
 
-COPY scripts/requirements.txt .
-COPY scripts/Gemfile .
 COPY scripts/04_install_dev_languages.sh .
 RUN bash 04_install_dev_languages.sh
+
+COPY scripts/requirements.txt .
+COPY scripts/Gemfile .
+COPY scripts/05_config_dev_languages.sh .
+RUN bash 05_config_dev_languages.sh
 
 # # yarn
 # RUN npm config set registry https://registry.npmmirror.com

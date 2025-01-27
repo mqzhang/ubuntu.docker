@@ -17,9 +17,3 @@ gem 'pycall'
 gem 'pandas'
 gem 'numpy'
 gem 'matplotlib'
-
-# https://github.com/alexrudall/ruby-openai
-gem 'ruby-openai'
-
-# https://github.com/andreibondarev/langchainrb
-gem 'langchainrb'
