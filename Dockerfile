@@ -1,28 +1,27 @@
 FROM ubuntu:24.04
 
-# Set the timezone environment variable
-ENV TZ=Asia/Shanghai
-
-ENV DEBIAN_FRONTEND noninteractive
-
-COPY scripts/tsinghua.ubuntu.24.04.sources.list .
-RUN cat tsinghua.ubuntu.24.04.sources.list > /etc/apt/sources.list.d/ubuntu.sources
-
-# Install the tzdata package and configure the timezone & ca-certificates
-RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata ca-certificates curl \
-    && ln -fs /usr/share/zoneinfo/$TZ /etc/localtime \
-    && dpkg-reconfigure -f noninteractive tzdata
-
 USER root
 SHELL ["/bin/bash", "-c"]
 WORKDIR /tmp
 
+# Set the timezone environment variable
+ENV TZ=Asia/Shanghai
+ENV DEBIAN_FRONTEND noninteractive
+
+COPY scripts/tsinghua.ubuntu.24.04.sources.list .
+COPY scripts/01_source_tz_setup.sh . 
+RUN  bash 01_source_tz_setup.sh
+# RUN cat tsinghua.ubuntu.24.04.sources.list > /etc/apt/sources.list.d/ubuntu.sources
+# # Install the tzdata package and configure the timezone & ca-certificates
+# RUN apt-get update \
+#     && DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata ca-certificates curl \
+#     && ln -fs /usr/share/zoneinfo/$TZ /etc/localtime \
+#     && dpkg-reconfigure -f noninteractive tzdata
 
 
 # apt install
-COPY scripts/basic_apt_install.sh .
-RUN bash basic_apt_install.sh
+COPY scripts/02_basic_apt_install.sh .
+RUN bash 02_basic_apt_install.sh
 # RUN <<EOT bash
 #     set -x
 #     apt-get update --yes && \
