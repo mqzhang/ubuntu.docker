@@ -36,46 +36,54 @@ RUN bash 02_basic_apt_install.sh
 #     screen less vim
 # EOT
 
-# yarn
-RUN npm config set registry https://registry.npmmirror.com
-RUN npm install --global yarn
-RUN yarn config set registry https://registry.npmmirror.com
+COPY scripts/03_install_mise.sh .
+RUN bash 03_install_mise.sh
 
-# install db
-COPY scripts/install_db.sh .
-RUN bash install_db.sh
-
-# install chrome
-COPY scripts/install_chrome.sh .
-RUN bash install_chrome.sh
-
-# ruby
-# https://github.com/rbenv/rbenv
-RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-RUN git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-ENV PATH="~/.rbenv/bin:$PATH"
-# RUN ~/.rbenv/plugins/ruby-build/install.sh
-RUN echo 'eval "$(~/.rbenv/bin/rbenv init - bash)"' >> ~/.bashrc
-RUN rbenv install 3.3
-RUN rbenv global 3.3
-
-# python
-RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-RUN cd ~/.pyenv && src/configure && make -C src
-ENV PATH="~/.pyenv/bin:$PATH"
-# RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-# RUN echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-RUN echo 'eval "$(~/.pyenv/bin/pyenv init -)"' >> ~/.bashrc
-RUN echo 'export PYTHON_CONFIGURE_OPTS="--enable-shared"' >> ~/.bashrc
-ENV PYTHON_CONFIGURE_OPTS='--enable-shared'
-RUN pyenv install 3.13
-RUN pyenv global 3.13
-
-# python 和 ruby 基础环境配置
 COPY scripts/requirements.txt .
 COPY scripts/Gemfile .
-COPY scripts/pyrb_setup.sh .
-RUN bash pyrb_setup.sh
+COPY scripts/04_install_dev_languages.sh .
+RUN bash 04_install_dev_languages.sh
+
+# # yarn
+# RUN npm config set registry https://registry.npmmirror.com
+# RUN npm install --global yarn
+# RUN yarn config set registry https://registry.npmmirror.com
+
+# # install db
+# COPY scripts/install_db.sh .
+# RUN bash install_db.sh
+
+# # install chrome
+# COPY scripts/install_chrome.sh .
+# RUN bash install_chrome.sh
+
+# # ruby
+# # https://github.com/rbenv/rbenv
+# RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+# RUN git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+# ENV PATH="~/.rbenv/bin:$PATH"
+# # RUN ~/.rbenv/plugins/ruby-build/install.sh
+# RUN echo 'eval "$(~/.rbenv/bin/rbenv init - bash)"' >> ~/.bashrc
+# RUN rbenv install 3.3
+# RUN rbenv global 3.3
+
+# # python
+# RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+# RUN cd ~/.pyenv && src/configure && make -C src
+# ENV PATH="~/.pyenv/bin:$PATH"
+# # RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+# # RUN echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+# RUN echo 'eval "$(~/.pyenv/bin/pyenv init -)"' >> ~/.bashrc
+# RUN echo 'export PYTHON_CONFIGURE_OPTS="--enable-shared"' >> ~/.bashrc
+# ENV PYTHON_CONFIGURE_OPTS='--enable-shared'
+# RUN pyenv install 3.13
+# RUN pyenv global 3.13
+
+# # python 和 ruby 基础环境配置
+# COPY scripts/requirements.txt .
+# COPY scripts/Gemfile .
+# COPY scripts/pyrb_setup.sh .
+# RUN bash pyrb_setup.sh
 
 # jupyter
 RUN mkdir ~/.jupyter

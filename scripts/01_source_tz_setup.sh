@@ -1,4 +1,4 @@
-#cat tsinghua.ubuntu.24.04.sources.list > /etc/apt/sources.list.d/ubuntu.sources
+cat tsinghua.ubuntu.24.04.sources.list > /etc/apt/sources.list.d/ubuntu.sources
 
 export TZ=Asia/Shanghai
 export DEBIAN_FRONTEND noninteractive
