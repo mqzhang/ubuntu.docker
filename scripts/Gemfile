@@ -9,7 +9,7 @@ gem 'dotenv'
 
 # iruby related
 # https://github.com/SciRuby/iruby
-gem 'iruby'
+# gem 'iruby'
 gem 'pry'
 
 # https://github.com/mrkn/pycall.rb
