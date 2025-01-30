@@ -19,7 +19,7 @@ Buid this image in local with the following command:
 sh docker/build.sh
 ```
 
-Run this image with the following command, this command will expose port 8001 to 8888 which runs the jupyter service:
+Run this image with the following command, this command will expose port 3001 to 3000, and 8001 to 8888 (runs the jupyter service) :
 ```bash
 sh docker/run.sh
 ```
