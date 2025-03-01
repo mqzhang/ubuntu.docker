@@ -1,0 +1,1 @@
+docker run -it -d --restart unless-stopped --name mqdev -p 3001:3000 -p 8001:8888 -v /c/Users/mq:/root/home -v /c/Users/mq/source/ubuntu.docker:/root/workdir quay.io/mqdev/ubuntu
