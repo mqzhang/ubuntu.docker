@@ -51,6 +51,10 @@ RUN bash 05_config_dev_languages.sh
 COPY scripts/06_install_chrome.sh .
 RUN bash 06_install_chrome.sh
 
+# install docker
+COPY scripts/07_install_docker.sh .
+RUN bash 07_install_docker.sh
+
 # # yarn
 # RUN npm config set registry https://registry.npmmirror.com
 # RUN npm install --global yarn
