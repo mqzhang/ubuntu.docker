@@ -9,7 +9,7 @@ ENV TZ=Asia/Shanghai
 ENV DEBIAN_FRONTEND noninteractive
 
 COPY scripts/tsinghua.ubuntu.24.04.sources.list .
-COPY scripts/01_source_tz_setup.sh . 
+COPY scripts/01_source_tz_setup.sh .
 RUN  bash 01_source_tz_setup.sh
 # RUN cat tsinghua.ubuntu.24.04.sources.list > /etc/apt/sources.list.d/ubuntu.sources
 # # Install the tzdata package and configure the timezone & ca-certificates
@@ -46,6 +46,10 @@ COPY scripts/requirements.txt .
 COPY scripts/Gemfile .
 COPY scripts/05_config_dev_languages.sh .
 RUN bash 05_config_dev_languages.sh
+
+# install chrome
+COPY scripts/06_install_chrome.sh .
+RUN bash 06_install_chrome.sh
 
 # # yarn
 # RUN npm config set registry https://registry.npmmirror.com
@@ -92,7 +96,9 @@ RUN bash 05_config_dev_languages.sh
 RUN mkdir ~/.jupyter
 COPY jupyter/jupyter_lab_config.py .
 
-RUN apt-get clean
+# 清理 apt 缓存，减小镜像大小
+RUN apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 
 EXPOSE 3000
 EXPOSE 8888
