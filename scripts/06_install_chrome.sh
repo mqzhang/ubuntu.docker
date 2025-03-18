@@ -7,7 +7,7 @@ sudo apt-get update -qq
 sudo apt-get install -y wget gnupg ca-certificates apt-transport-https
 
 # 下载 Google Chrome 的 APT 密钥
-sudo wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
+sudo wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
 
 # 添加 Google Chrome 的 APT 源
 sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
