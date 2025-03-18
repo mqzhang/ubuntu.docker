@@ -19,4 +19,4 @@ sudo apt-get update -qq
 sudo apt-get install -y google-chrome-stable
 
 # 可选：安装 xvfb (用于无头模式)
-sudo apt-get install -y xvfb
+sudo apt-get install -y xvfb lsof
